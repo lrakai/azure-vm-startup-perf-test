@@ -65,12 +65,12 @@
         "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
         "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
-        "storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().name, subscription().subscriptionId))]",
+        "storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().name, subscription().subscriptionId, parameters('virtualMachineName')))]",
         "storageContainerUri": "[concat(concat('https://', variables('storageAccountName'), '.blob.core.windows.net/'), 'vhds/')]",
-        "networkInterfaceName":"[concat(parameters('networkInterfaceName'), uniqueString(resourceGroup().name, subscription().subscriptionId))]",
-        "virtualNetworkName":"[concat(parameters('virtualNetworkName'), uniqueString(resourceGroup().name, subscription().subscriptionId))]",
-        "networkSecurityGroupName":"[concat(parameters('networkSecurityGroupName'), uniqueString(resourceGroup().name, subscription().subscriptionId))]",
-        "publicIpAddressName":"[concat(parameters('publicIpAddressName'), uniqueString(resourceGroup().name, subscription().subscriptionId))]"
+        "networkInterfaceName":"[concat(parameters('networkInterfaceName'), uniqueString(resourceGroup().name, subscription().subscriptionId, parameters('virtualMachineName')))]",
+        "virtualNetworkName":"[concat(parameters('virtualNetworkName'), uniqueString(resourceGroup().name, subscription().subscriptionId, parameters('virtualMachineName')))]",
+        "networkSecurityGroupName":"[concat(parameters('networkSecurityGroupName'), uniqueString(resourceGroup().name, subscription().subscriptionId, parameters('virtualMachineName')))]",
+        "publicIpAddressName":"[concat(parameters('publicIpAddressName'), uniqueString(resourceGroup().name, subscription().subscriptionId, parameters('virtualMachineName')))]"
                 
     },
     "resources": [
