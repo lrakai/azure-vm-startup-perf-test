@@ -27,6 +27,6 @@ function New-Test {
         -virtualMachineName $Parameters['virtualMachineName'] `
         -managedDisks $Parameters['managedDisks'] `
         -osDiskType $Parameters['osDiskType'] `
-        -virtualMachineSize $Parameters['virtualMachineSize']
-        #-AsJob
+        -virtualMachineSize $Parameters['virtualMachineSize'] `
+        -AsJob
 }

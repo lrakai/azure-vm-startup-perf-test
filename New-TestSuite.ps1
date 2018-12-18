@@ -9,6 +9,7 @@ function Set-Parameters {
         $TestParams
     )
     $Parameters['virtualMachineName'] = $TestParams[0]
+    $Parameters['resourceGroupName'] = "vm-perf-test-" + $TestParams[0]
     $Parameters['virtualMachineSize'] = $TestParams[1]
     $Parameters['managedDisks'] = $TestParams[2]
     $Parameters['diskType'] = $TestParams[3]
@@ -27,3 +28,6 @@ foreach ($test in $tests) {
     Write-Host "Running " $Parameters['virtualMachineName']
     New-Test $Parameters
 }
+
+# Wait until all tests complete
+Wait-Job
