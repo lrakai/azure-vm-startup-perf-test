@@ -33,7 +33,7 @@
             ]
         },
         "publicIpAddressName": {
-            "value": "b2sunmanghdd-ip"
+            "value": "ip"
         },
         "publicIpAddressType": {
             "value": "Dynamic"
@@ -41,17 +41,11 @@
         "publicIpAddressSku": {
             "value": "Basic"
         },
-        "virtualMachineName": {
-            "value": "b2sunmanghdd"
-        },
-        "virtualMachineRG": {
-            "value": "vm-perf-test"
-        },
         "diskNameSalt": {
             "value": "20181217162745"
         },
         "storageAccountName": {
-            "value": "vmperftestdisks"
+            "value": "vmprftstdsk"
         },
         "storageAccountType": {
             "value": "Standard_LRS"
@@ -59,14 +53,11 @@
         "storageAccountKind": {
             "value": "Storage"
         },
-        "virtualMachineSize": {
-            "value": "Standard_B2s"
-        },
         "adminUsername": {
             "value": "1Cloud_Academy_Labs!"
         },
         "adminPassword": {
-            "value": null
+            "value": "1Cloud_Academy_Labs"
         }
     }
 }

@@ -1,7 +1,7 @@
 . .\Variables.ps1
 
-if (Parameters['Unmanaged'] && Parameters['DiskType'] == "StandardSSD") {
-    Write-Error "Standard SSDs and Unmanaged disks are not supported"
+if (-Not (Parameters['managedDisks']) -And (Parameters['DiskType'] -eq "StandardSSD_LRS") {
+    Write-Error "Standard SSDs and Unmanaged disks are not supported in Azure"
     Exit
 }
 

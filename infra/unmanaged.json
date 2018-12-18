@@ -2,9 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "testName": {
-            "type": "string"
-        },
         "networkInterfaceName": {
             "type": "string"
         },
@@ -36,6 +33,12 @@
             "type": "string"
         },
         "virtualMachineName": {
+            "type": "string"
+        },
+        "managedDisks": {
+            "type": "bool"
+        },
+        "osDiskType": {
             "type": "string"
         },
         "diskNameSalt": {
@@ -72,7 +75,7 @@
         {
             "name": "[parameters('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2018-04-01",
+            "apiVersion": "2018-10-01",
             "location": "[variables('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]",
@@ -99,7 +102,7 @@
                 }
             },
             "tags": {
-                "test": "[parameters('testName')]"
+                "test": "[parameters('virtualMachineName')]"
             }
         },
         {
@@ -111,7 +114,7 @@
                 "securityRules": "[parameters('networkSecurityGroupRules')]"
             },
             "tags": {
-                "test": "[parameters('testName')]"
+                "test": "[parameters('virtualMachineName')]"
             }
         },
         {
@@ -126,7 +129,7 @@
                 "subnets": "[parameters('subnets')]"
             },
             "tags": {
-                "test": "[parameters('testName')]"
+                "test": "[parameters('virtualMachineName')]"
             }
         },
         {
@@ -141,10 +144,11 @@
                 "name": "[parameters('publicIpAddressSku')]"
             },
             "tags": {
-                "test": "[parameters('testName')]"
+                "test": "[parameters('virtualMachineName')]"
             }
         },
         {
+            "condition": "[parameters('managedDisks')]",
             "name": "[variables('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2018-07-01",
@@ -155,7 +159,7 @@
                 "name": "[parameters('storageAccountType')]"
             },
             "tags": {
-                "test": "[parameters('testName')]"
+                "test": "[parameters('virtualMachineName')]"
             }
         },
         {
@@ -174,10 +178,13 @@
                 "storageProfile": {
                     "osDisk": {
                         "createOption": "fromImage",
-                        "vhd": {
-                            "uri": "[concat(variables('storageContainerUri'), parameters('virtualMachineName'), parameters('diskNameSalt'), '.vhd')]"
+                        "managedDisk": {
+                            "storageAccountType": "[if(parameters('managedDisks'), parameters('osDiskType'), json('null'))]"
                         },
-                        "name": "[parameters('virtualMachineName')]"
+                        "vhd": {
+                            "uri": "[if(parameters('managedDisks'), json('null'), concat(variables('storageContainerUri'), parameters('virtualMachineName'), parameters('diskNameSalt'), '.vhd'))]"
+                        },
+                        "name": "[if(parameters('managedDisks'), json('null'), parameters('virtualMachineName'))]"
                     },
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
@@ -204,7 +211,7 @@
                 }
             },
             "tags": {
-                "test": "[parameters('testName')]"
+                "test": "[parameters('virtualMachineName')]"
             }
         }
     ],
