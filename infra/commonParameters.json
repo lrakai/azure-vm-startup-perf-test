@@ -47,9 +47,6 @@
         "storageAccountName": {
             "value": "vmprftstdsk"
         },
-        "storageAccountType": {
-            "value": "Standard_LRS"
-        },
         "storageAccountKind": {
             "value": "Storage"
         },
