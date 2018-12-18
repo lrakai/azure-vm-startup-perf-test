@@ -1,4 +1,7 @@
+$ErrorActionPreference = "Stop"
+
 . .\Parameters.ps1
+. .\New-Test.ps1
 
 function Set-Parameters {
     param (
