@@ -47,9 +47,6 @@
         "storageAccountName": {
             "type": "string"
         },
-        "storageAccountType": {
-            "type": "string"
-        },
         "storageAccountKind": {
             "type": "string"
         },
@@ -156,7 +153,7 @@
             "properties": {},
             "kind": "[parameters('storageAccountKind')]",
             "sku": {
-                "name": "[parameters('storageAccountType')]"
+                "name": "[parameters('osDiskType')]"
             },
             "tags": {
                 "test": "[parameters('virtualMachineName')]"
