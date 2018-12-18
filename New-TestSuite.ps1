@@ -3,13 +3,20 @@ $ErrorActionPreference = "Stop"
 . .\Parameters.ps1
 . .\New-Test.ps1
 
+function Get-ResourceGroupName {
+    param (
+        $TestParams
+    )
+    "vm-perf-test-" + $TestParams[0]
+}
+
 function Set-Parameters {
     param (
         $Parameters,
         $TestParams
     )
     $Parameters['virtualMachineName'] = $TestParams[0]
-    $Parameters['resourceGroupName'] = "vm-perf-test-" + $TestParams[0]
+    $Parameters['resourceGroupName'] = Get-ResourceGroupName $TestParams
     $Parameters['virtualMachineSize'] = $TestParams[1]
     $Parameters['managedDisks'] = $TestParams[2]
     $Parameters['diskType'] = $TestParams[3]
@@ -30,4 +37,6 @@ foreach ($test in $tests) {
 }
 
 # Wait until all tests complete
-Wait-Job
+Get-Job | Wait-Job
+Get-Job | Remove-Job
+
