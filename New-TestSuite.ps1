@@ -24,6 +24,6 @@ $Tests = @(
 
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
-    Write-Host $Parameters['virtualMachineName']
+    Write-Host "Running " $Parameters['virtualMachineName']
     New-Test $Parameters
 }
