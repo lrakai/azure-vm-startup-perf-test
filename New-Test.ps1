@@ -1,4 +1,9 @@
-. .\Variables.ps1
+function New-Test {
+    param (
+        $Parameters
+    )
+
+}
 
 if (-Not (Parameters['managedDisks']) -And (Parameters['DiskType'] -eq "StandardSSD_LRS") {
     Write-Error "Standard SSDs and Unmanaged disks are not supported in Azure"
