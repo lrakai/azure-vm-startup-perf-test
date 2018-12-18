@@ -173,16 +173,7 @@
                     "vmSize": "[parameters('virtualMachineSize')]"
                 },
                 "storageProfile": {
-                    "osDisk": {
-                        "createOption": "fromImage",
-                        "managedDisk": {
-                            "storageAccountType": "[if(parameters('managedDisks'), parameters('osDiskType'), json('null'))]"
-                        },
-                        "vhd": {
-                            "uri": "[if(parameters('managedDisks'), json('null'), concat(variables('storageContainerUri'), parameters('virtualMachineName'), parameters('diskNameSalt'), '.vhd'))]"
-                        },
-                        "name": "[if(parameters('managedDisks'), json('null'), parameters('virtualMachineName'))]"
-                    },
+                    "osDisk": "[if(parameters('managedDisks'), json(concat('{\"createOption\":\"fromImage\",\"managedDisk\":{\"storageAccountType\":\"',parameters('osDiskType'),'\"}')), json(concat('{\"createOption\":\"fromImage\",\"vhd\":{\"uri\":\"',variables('storageContainerUri'),parameters('virtualMachineName'),parameters('diskNameSalt'),'.vhd\"},\"name\":\"',parameters('virtualMachineName'),'\"}')))]",
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
                         "offer": "WindowsServer",
