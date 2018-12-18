@@ -62,8 +62,8 @@
     },
     "variables": {
         "location": "[resourceGroup().location]",
-        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]",
-        "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
+        "vnetId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
         "storageAccountName": "[concat(parameters('storageAccountName'), uniqueString(resourceGroup().name, subscription().subscriptionId))]",
         "storageContainerUri": "[concat(concat('https://', variables('storageAccountName'), '.blob.core.windows.net/'), 'vhds/')]",
@@ -150,7 +150,7 @@
             }
         },
         {
-            "condition": "[parameters('managedDisks')]",
+            "condition": "[equals(parameters('managedDisks'), bool('false'))]",
             "name": "[variables('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2018-07-01",
