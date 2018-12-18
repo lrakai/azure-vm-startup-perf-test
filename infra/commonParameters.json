@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "networkInterfaceName": {
+            "value": "nic"
+        },
+        "networkSecurityGroupName": {
+            "value": "nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": []
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.1.0.0/16"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.1.0.0/16"
+                    }
+                }
+            ]
+        },
+        "publicIpAddressName": {
+            "value": "b2sunmanghdd-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Dynamic"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "virtualMachineName": {
+            "value": "b2sunmanghdd"
+        },
+        "virtualMachineRG": {
+            "value": "vm-perf-test"
+        },
+        "diskNameSalt": {
+            "value": "20181217162745"
+        },
+        "storageAccountName": {
+            "value": "vmperftestdisks"
+        },
+        "storageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "storageAccountKind": {
+            "value": "Storage"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2s"
+        },
+        "adminUsername": {
+            "value": "1Cloud_Academy_Labs!"
+        },
+        "adminPassword": {
+            "value": null
+        }
+    }
+}
