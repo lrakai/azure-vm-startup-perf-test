@@ -21,7 +21,7 @@ function Set-Parameters {
     $Parameters['resourceGroupName'] = Get-ResourceGroupName $TestParams
     $Parameters['virtualMachineSize'] = $TestParams[1]
     $Parameters['managedDisks'] = $TestParams[2]
-    $Parameters['diskType'] = $TestParams[3]
+    $Parameters['osDiskType'] = $TestParams[3]
 }
 
 foreach ($test in $tests) {
