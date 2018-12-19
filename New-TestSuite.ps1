@@ -41,8 +41,8 @@ foreach ($test in $tests) {
 Get-Job | Wait-Job
 Get-Job | Remove-Job
 
+Write-Host "Analyzing test results (in seconds) in CSV format"
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
-    Write-Host "Analyzing " $Parameters['resourceGroupName']
-    New-Test $Parameters
+    Write-TestResult $Parameters
 }

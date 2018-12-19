@@ -32,7 +32,7 @@ function Write-TestResult {
         | Where-Object { $_.properties.targetResource.resourceName -eq $Parameters['virtualMachineName']} `
         ).properties.duration)
 
-    Write-Host "$(Parameters['virtualMachineName'])," `
+    Write-Host "$($Parameters['virtualMachineName'])," `
         "$([math]::Round($deploymentDuration.TotalSeconds,1))," `
         "$([math]::Round($vmDuration.TotalSeconds,1))"
 }
