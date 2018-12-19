@@ -22,8 +22,8 @@ function New-Test {
     New-AzureRmResourceGroupDeployment `
         -Name $Parameters['virtualMachineName'] `
         -ResourceGroupName $Parameters['resourceGroupName'] `
-        -TemplateFile .\infra\arm-template.json `
-        -TemplateParameterFile .\infra\commonParameters.json `
+        -TemplateFile $Parameters['templateFile'] `
+        -TemplateParameterFile $Parameters['templateParameterFile'] `
         -virtualMachineName $Parameters['virtualMachineName'] `
         -managedDisks $Parameters['managedDisks'] `
         -osDiskType $Parameters['osDiskType'] `

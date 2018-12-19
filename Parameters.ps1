@@ -8,6 +8,8 @@ $Parameters = @{
     # Fixed Parameters (Stay the same each test run)
     location = "SouthCentralUS"
     resourceGroupName = "vm-perf-test"
+    templateFile = ".\infra\arm-template.json"
+    templateParameterFile = ".\infra\commonParameters.json"
 }
 
 $Tests = @(
