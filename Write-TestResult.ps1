@@ -4,6 +4,16 @@ function Write-TestResult {
         $Parameters
     )
 
+    $deploymentState = (Get-AzureRmResourceGroupDeployment `
+        -Name $Parameters['virtualMachineName'] `
+        -ResourceGroupName $Parameters['resourceGroupName'] `
+    ).ProvisioningState
+
+    if ($deploymentState -ne "Succeeded") {
+        Write-Host "$($Parameters['virtualMachineName']) state is $($deploymentState)"
+        return
+    }
+
     $operations = Get-AzureRmResourceGroupDeploymentOperation `
         -Name $Parameters['virtualMachineName'] `
         -ResourceGroupName $Parameters['resourceGroupName'] `
