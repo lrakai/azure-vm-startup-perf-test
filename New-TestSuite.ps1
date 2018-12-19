@@ -3,6 +3,7 @@ $ErrorActionPreference = "Stop"
 . .\Parameters.ps1
 . .\New-Test.ps1
 . .\Write-TestResult.ps1
+. .\Remove-Test.ps1
 
 function Get-ResourceGroupName {
     param (
@@ -42,6 +43,12 @@ Get-Job | Wait-Job
 Get-Job | Remove-Job
 
 Write-Host "Analyzing test results (in seconds) in CSV format"
+foreach ($test in $tests) {
+    Set-Parameters $Parameters $test
+    Write-TestResult $Parameters
+}
+
+Write-Host "Removing resources"
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
     Write-TestResult $Parameters
