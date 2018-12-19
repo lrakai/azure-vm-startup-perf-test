@@ -24,7 +24,7 @@ function Set-Parameters {
     $Parameters['osDiskType'] = $TestParams[3]
 }
 
-foreach ($test in $tests) {
+foreach ($test in $Tests) {
     Set-Parameters $Parameters $test
     Write-Host "Running " $Parameters['resourceGroupName']
     New-Test $Parameters
@@ -34,13 +34,13 @@ foreach ($test in $tests) {
 Get-Job | Wait-Job | Remove-Job
 
 Write-Host "Writing test results (in seconds) in CSV format"
-foreach ($test in $tests) {
+foreach ($test in $Tests) {
     Set-Parameters $Parameters $test
     Write-TestResult $Parameters
 }
 
 Write-Host "Removing resources"
-foreach ($test in $tests) {
+foreach ($test in $Tests) {
     Set-Parameters $Parameters $test
     Remove-Test $Parameters
 }
