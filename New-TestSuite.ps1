@@ -24,14 +24,6 @@ function Set-Parameters {
     $Parameters['diskType'] = $TestParams[3]
 }
 
-$Tests = @(
-    ,@("b2sunmanhdd", "Standard_B2s", $false, "Standard_LRS")
-    ,@("b2sunmanpssd", "Standard_B2s", $false, "Premium_LRS")
-    ,@("b2smanhdd", "Standard_B2s", $true, "Standard_LRS")
-    ,@("b2smansssd", "Standard_B2s", $true, "StandardSSD_LRS")
-    ,@("b2smanpssd", "Standard_B2s", $true, "Premium_LRS")
-)
-
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
     Write-Host "Running " $Parameters['resourceGroupName']
@@ -39,8 +31,7 @@ foreach ($test in $tests) {
 }
 
 # Wait until all tests complete
-Get-Job | Wait-Job
-Get-Job | Remove-Job
+Get-Job | Wait-Job | Remove-Job
 
 Write-Host "Analyzing test results (in seconds) in CSV format"
 foreach ($test in $tests) {
@@ -51,5 +42,8 @@ foreach ($test in $tests) {
 Write-Host "Removing resources"
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
-    Write-TestResult $Parameters
+    Remove-Test $Parameters
 }
+
+# Wait until all removals are complete
+Get-Job | Wait-Job | Remove-Job
