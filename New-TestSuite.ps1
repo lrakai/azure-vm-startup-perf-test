@@ -33,7 +33,7 @@ foreach ($test in $tests) {
 # Wait until all tests complete
 Get-Job | Wait-Job | Remove-Job
 
-Write-Host "Analyzing test results (in seconds) in CSV format"
+Write-Host "Writing test results (in seconds) in CSV format"
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
     Write-TestResult $Parameters
