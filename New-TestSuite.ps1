@@ -2,6 +2,7 @@ $ErrorActionPreference = "Stop"
 
 . .\Parameters.ps1
 . .\New-Test.ps1
+. .\Write-TestResult.ps1
 
 function Get-ResourceGroupName {
     param (
@@ -32,7 +33,7 @@ $Tests = @(
 
 foreach ($test in $tests) {
     Set-Parameters $Parameters $test
-    Write-Host "Running " $Parameters['virtualMachineName']
+    Write-Host "Running " $Parameters['resourceGroupName']
     New-Test $Parameters
 }
 
@@ -40,3 +41,8 @@ foreach ($test in $tests) {
 Get-Job | Wait-Job
 Get-Job | Remove-Job
 
+foreach ($test in $tests) {
+    Set-Parameters $Parameters $test
+    Write-Host "Analyzing " $Parameters['resourceGroupName']
+    New-Test $Parameters
+}
