@@ -48,7 +48,7 @@ These results correspond to the ARM template in `infra/arm-template.json` and be
 
 ### Azure VM Extension Runtimes
 
-These results correspond to the ARM template in `infra/arm-template.json` and benchmarks the deployment time of different VM SKUs and disk configurations (managed/unmanaged and HDD/SSD/Premium SSD):
+These results correspond to the ARM template in `infra/arm-template.scriptExtension.json` and benchmarks the deployment time of different VM SKUs and disk configurations (managed/unmanaged and HDD/SSD/Premium SSD):
 
 | Description                 | Name           | Total deploy (mm:ss.0) | VM deploy (mm:ss.0) | VM Extension (mm:ss.0) | Max IOPS | RAM (GB) | VCPU | Cost/mth | Note          | 
 |-----------------------------|----------------|------------------------|---------------------|------------------------|----------|----------|------|----------|---------------| 
