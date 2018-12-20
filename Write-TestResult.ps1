@@ -54,7 +54,7 @@ function Write-TestResult {
 
     # VM Extension duration
     $vmExtensionOperation = $operations `
-        | Where-Object { $_.properties.targetResource.resourceName -eq 'bootstrap'}
+        | Where-Object { $_.properties.targetResource.resourceName -eq "$($Parameters['virtualMachineName'])/bootstrap"}
     if($vmExtensionOperation) {
         $vmExtensionDuration = [Xml.XmlConvert]::ToTimeSpan($vmExtensionOperation.properties.duration)
         Write-Host ", $([math]::Round($vmExtensionDuration.TotalSeconds,1))" `
