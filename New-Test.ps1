@@ -1,6 +1,6 @@
 function New-Test {
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         $Parameters
     )
 
@@ -19,14 +19,22 @@ function New-Test {
         Write-Host "Using existing resource group " $Parameters['resourceGroupName'];
     }
 
-    New-AzureRmResourceGroupDeployment `
-        -Name $Parameters['virtualMachineName'] `
-        -ResourceGroupName $Parameters['resourceGroupName'] `
-        -TemplateFile $Parameters['templateFile'] `
-        -TemplateParameterFile $Parameters['templateParameterFile'] `
-        -virtualMachineName $Parameters['virtualMachineName'] `
-        -managedDisks $Parameters['managedDisks'] `
-        -osDiskType $Parameters['osDiskType'] `
-        -virtualMachineSize $Parameters['virtualMachineSize'] `
-        -AsJob
+    $deploymentParameters = @{
+        Name                  = $Parameters['virtualMachineName']
+        ResourceGroupName     = $Parameters['resourceGroupName']
+        TemplateFile          = $Parameters['templateFile']
+        TemplateParameterFile = $Parameters['templateParameterFile']
+        virtualMachineName    = $Parameters['virtualMachineName']
+        managedDisks          = $Parameters['managedDisks']
+        osDiskType            = $Parameters['osDiskType']
+        virtualMachineSize    = $Parameters['virtualMachineSize']
+        AsJob                 = $true
+    }
+
+    if ($Parameters['bootstrapScript']) {
+
+        $deploymentParameters['bootstrapScript'] = $Parameters['bootstrapScript']
+    }
+
+    New-AzureRmResourceGroupDeployment @deploymentParameters
 }

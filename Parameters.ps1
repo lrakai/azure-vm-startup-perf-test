@@ -10,6 +10,7 @@ $Parameters = @{
     resourceGroupName = "vm-perf-test"
     templateFile = ".\infra\arm-template.scriptExtension.json"
     templateParameterFile = ".\infra\commonParameters.json"
+    bootstrapScript = "bootstrap.lite.ps1" # For arm-template.scriptExtension.json
 }
 
 $Tests = @(

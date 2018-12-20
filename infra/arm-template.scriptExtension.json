@@ -58,6 +58,9 @@
         },
         "adminPassword": {
             "type": "string"
+        },
+        "bootstrapScript": {
+            "type": "string"
         }
     },
     "variables": {
@@ -226,12 +229,12 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "https://raw.githubusercontent.com/lrakai/azure-vm-startup-perf-test/master/src/bootstrap.ps1"
+                        "[concat('https://raw.githubusercontent.com/lrakai/azure-vm-startup-perf-test/master/src/', parameters('bootstrapScript'))]"
                     ],
                     "timestamp":1
                 },
                 "protectedSettings": {
-                    "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File bootstrap.ps1 -user ',parameters('adminUsername'),' -password ',parameters('adminPassword'))]"
+                    "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',parameters('bootstrapScript'),' -user ',parameters('adminUsername'),' -password ',parameters('adminPassword'))]"
                 }
             }
         }
