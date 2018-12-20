@@ -58,7 +58,7 @@ These results correspond to the ARM template in `infra/arm-template.scriptExtens
 | A2 managed standard ssd     | a2mansssd      | 23:10.9                | 04:12.0             | 18:35.8                | 4x500    | 3.5      | 2    | $133.92  |               | 
 | A2 managed premium ssd      | a2manpssd      |                        |                     |                        | 4x500    | 3.5      | 2    | $133.92  | Not Supported | 
 | A2v2 unmanaged hdd          | a2v2unmanhdd   | 15:03.9                | 03:19.4             | 10:58.3                | 4x500    | 4        | 2    | $101.18  |               | 
-| A2v2 unmanaged premium ssd  | a2v2unmanpssd  | 00:00.0                | 00:00.0             |                        | 4x500    | 4        | 2    | $101.18  | Not Supported | 
+| A2v2 unmanaged premium ssd  | a2v2unmanpssd  |                 |              |                        | 4x500    | 4        | 2    | $101.18  | Not Supported | 
 | A2v2 managed hdd            | a2v2manhdd     | 22:39.5                | 03:22.2             | 18:51.1                | 4x500    | 4        | 2    | $101.18  |               | 
 | A2v2 managed standard ssd   | a2v2mansssd    | 14:56.0                | 03:41.6             | 10:43.5                | 4x500    | 4        | 2    | $101.18  |               | 
 | A2v2 managed premium ssd    | a2v2manpssd    |                        |                     |                        | 4x500    | 4        | 2    | $101.18  | Not Supported | 
