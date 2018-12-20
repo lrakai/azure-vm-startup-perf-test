@@ -14,6 +14,7 @@ function Write-TestResult {
         return
     }
 
+    # Deployment duration
     $operations = Get-AzureRmResourceGroupDeploymentOperation `
         -Name $Parameters['virtualMachineName'] `
         -ResourceGroupName $Parameters['resourceGroupName'] `
@@ -38,11 +39,27 @@ function Write-TestResult {
     
     $deploymentDuration = $endTime - $startTime
 
-    $vmDuration = [Xml.XmlConvert]::ToTimeSpan(($operations `
-        | Where-Object { $_.properties.targetResource.resourceName -eq $Parameters['virtualMachineName']} `
-        ).properties.duration)
-
     Write-Host "$($Parameters['virtualMachineName'])," `
-        "$([math]::Round($deploymentDuration.TotalSeconds,1))," `
-        "$([math]::Round($vmDuration.TotalSeconds,1))"
+        "$([math]::Round($deploymentDuration.TotalSeconds,1))" `
+        -NoNewline
+
+    # VM duration
+    $vmOperation = $operations `
+        | Where-Object { $_.properties.targetResource.resourceName -eq $Parameters['virtualMachineName']}
+    if($vmOperation) {
+        $vmDuration = [Xml.XmlConvert]::ToTimeSpan($vmOperation.properties.duration)
+        Write-Host ", $([math]::Round($vmDuration.TotalSeconds,1))" `
+            -NoNewline
+    }
+
+    # VM Extension duration
+    $vmExtensionOperation = $operations `
+        | Where-Object { $_.properties.targetResource.resourceName -eq 'bootstrap'}
+    if($vmExtensionOperation) {
+        $vmExtensionDuration = [Xml.XmlConvert]::ToTimeSpan($vmExtensionOperation.properties.duration)
+        Write-Host ", $([math]::Round($vmExtensionDuration.TotalSeconds,1))" `
+            -NoNewline
+    }
+
+    Write-Host
 }
